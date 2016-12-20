@@ -21,7 +21,8 @@ if __name__ == "__main__":
     model = structure[0]
 
     # TODO: Implement check for occupancy values: Only 1.00 and 0.50?
-
+    #testcom
+    
     class NMROutputSelector2(Select):
         # Inherit methods from Select class
         def accept_atom(self, atom):
