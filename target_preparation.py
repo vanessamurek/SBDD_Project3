@@ -37,22 +37,22 @@ def remove_het_atoms(model, reference_ligand):
 
 if __name__ == "__main__":
     # Specify file path to PDB structure as first argument
-    pdb_structure_file_name = sys.argv[1]
+    pdb_structure_file_path = sys.argv[1]
 
     # Define PDB ID and get first model from PDB structure
     pdb_id = '3B7E'
-    model = get_model_from_pdb(pdb_structure_file_name, pdb_id)
+    model = get_model_from_pdb(pdb_structure_file_path, pdb_id)
 
-    # Define reference ligand
+    # Define residue ID for reference ligand
     reference_ligand = 'H_ZMR'
 
-    # Remove solvents, water molecules and other HET atoms, except for ligand from model
+    # Remove solvents, water molecules and other HET atoms, except for reference ligand from model
     model_without_het_atoms = remove_het_atoms(model, reference_ligand)
 
-    # Create a PDB structure of each of the two chains
+    # Create a PDB structure of each of the two chains, handling alternative locations
     io = PDBIO()
     io.set_structure(model_without_het_atoms['A'])
-    io.save("3b7e_chain_a.pdb", select=LocationSelector())
+    io.save("3b7e_chain_a_clean.pdb", select=LocationSelector())
 
     io.set_structure(model_without_het_atoms['B'])
-    io.save("3b7e_chain_b.pdb", select=LocationSelector())
+    io.save("3b7e_chain_b_clean.pdb", select=LocationSelector())
